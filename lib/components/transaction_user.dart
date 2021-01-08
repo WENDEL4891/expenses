@@ -9,7 +9,7 @@ class TransactionUser extends StatefulWidget {
 }
 
 class _TransactionUserState extends State<TransactionUser> {
-  final _transactions = [
+  var _transactions = <Transaction>[
     Transaction(
       id: 't1',
       title: 'Novo tênis de corrida',
@@ -21,14 +21,49 @@ class _TransactionUserState extends State<TransactionUser> {
       title: 'Conta de luz',
       value: 211.30,
       date: DateTime.now(),
-    )
+    ),
+    Transaction(
+      id: 't3',
+      title: 'Novo tênis de corrida',
+      value: 310.76,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't4',
+      title: 'Conta de luz',
+      value: 211.30,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't5',
+      title: 'Novo tênis de corrida',
+      value: 310.76,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't6',
+      title: 'Conta de luz',
+      value: 211.30,
+      date: DateTime.now(),
+    ),
   ];
+
+  _addTransaction(String title, double value) {
+    setState(() {
+      _transactions.add(Transaction(
+        id: UniqueKey().toString(),
+        date: DateTime.now(),
+        title: title,
+        value: value,
+      ));
+    });
+  }
 
   Widget build(BuildContext context) {
     return Column(
       children: [
         TransactionList(transactions: _transactions),
-        TransactionForm(),
+        TransactionForm(_addTransaction),
       ],
     );
   }
