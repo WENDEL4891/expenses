@@ -7,7 +7,7 @@ class TransactionList extends StatelessWidget {
 
   TransactionList({this.transactions});
 
-  build(BuildContext) {
+  build(BuildContext context) {
     return Container(
       height: 300,
       child: ListView.builder(
@@ -22,7 +22,7 @@ class TransactionList extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.purple,
+                      color: Theme.of(context).primaryColor,
                       width: 2,
                     ),
                   ),
@@ -32,7 +32,7 @@ class TransactionList extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Colors.purple,
+                        color: Theme.of(context).primaryColor,
                       )),
                 ),
                 Column(
@@ -40,10 +40,7 @@ class TransactionList extends StatelessWidget {
                   children: [
                     Text(
                       transaction.title,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                      style: Theme.of(context).textTheme.headline6,
                     ),
                     Text(
                       DateFormat('d MMM y').format(transaction.date),
