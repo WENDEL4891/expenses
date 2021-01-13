@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TransactionForm extends StatefulWidget {
-  final void Function(String, double) onSubmit;
+  final void Function(String, double, DateTime) onSubmit;
 
   TransactionForm(this.onSubmit);
 
@@ -12,17 +13,17 @@ class TransactionForm extends StatefulWidget {
 class _TransactionFormState extends State<TransactionForm> {
   final _titleController = TextEditingController();
   final _valueController = TextEditingController();
-  DateTime _selectedDate;
+  DateTime _selectedDate = DateTime.now();
 
   _submitForm() {
     final title = _titleController.text;
     final value = double.tryParse(_valueController.text) ?? 0.0;
-    if (title.isEmpty || value <= 0) {
+    if (title.isEmpty || value <= 0 || _selectedDate == null) {
       return;
     }
-    widget.onSubmit(title, value);
+    widget.onSubmit(title, value, _selectedDate);
   }
-  
+
   _showDatePicker() {
     showDatePicker(
       context: context,
@@ -30,11 +31,16 @@ class _TransactionFormState extends State<TransactionForm> {
       firstDate: DateTime(2019),
       lastDate: DateTime.now(),
     ).then((pickedDate) {
-      print(pickedDate.toString());
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        _selectedDate = pickedDate;
+      });
     });
     print('Executado!');
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -58,15 +64,17 @@ class _TransactionFormState extends State<TransactionForm> {
             ),
             Row(
               children: [
-                Text('Nenhuma data selecionada!'),
+                Expanded(
+                  child: Text(_selectedDate == null
+                      ? 'Nenhuma data selecionada!'
+                      : 'Data Selecionada: ${DateFormat('dd/MM/y').format(_selectedDate)}'),
+                ),
                 FlatButton(
                   textColor: Theme.of(context).primaryColor,
-                  child: Text(
-                    'Selecionar Data',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    )
-                  ),
+                  child: Text('Selecionar Data',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      )),
                   onPressed: _showDatePicker,
                 ),
               ],

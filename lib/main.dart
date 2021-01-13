@@ -47,42 +47,42 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _transactions = <Transaction>[
-    Transaction(
-      id: 't1',
-      title: 'Conta Antiga',
-      value: 310.76,
-      date: DateTime.now().subtract(Duration(days: 33)),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta 7 dias',
-      value: 30,
-      date: DateTime.now().subtract(Duration(days: 7)),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta 7 dias',
-      value: 14,
-      date: DateTime.now().subtract(Duration(days: 6)),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta 6 dias',
-      value: 10,
-      date: DateTime.now().subtract(Duration(days: 4)),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta de 6',
-      value: 20,
-      date: DateTime.now().subtract(Duration(days: 3)),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta hoje',
-      value: 1101101,
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Conta Antiga',
+    //   value: 310.76,
+    //   date: DateTime.now().subtract(Duration(days: 33)),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Conta 7 dias',
+    //   value: 30,
+    //   date: DateTime.now().subtract(Duration(days: 7)),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Conta 7 dias',
+    //   value: 14,
+    //   date: DateTime.now().subtract(Duration(days: 6)),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Conta 6 dias',
+    //   value: 10,
+    //   date: DateTime.now().subtract(Duration(days: 4)),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Conta de 6',
+    //   value: 20,
+    //   date: DateTime.now().subtract(Duration(days: 3)),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Conta hoje',
+    //   value: 1101101,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   List<Transaction> get _recentTransactions {
@@ -91,10 +91,10 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, DateTime date) {
     final newTransaction = Transaction(
       id: UniqueKey().toString(),
-      date: DateTime.now(),
+      date: date,
       title: title,
       value: value,
     );
